@@ -33,9 +33,9 @@ spring:
             model: gemini-1.5-flash
             temperature: 0.2
         embedding:
+          api-key: ${GEMINI_API_KEY}
           text:
-            options:
-              model: text-embedding-004
+            model: gemini-embedding-001
 app:
   jwt:
     secret: ${JWT_SECRET}
