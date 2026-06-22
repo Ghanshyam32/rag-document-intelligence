@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: empty-stack
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/empty-stack
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+  ai:
+    google:
+      genai:
+        api-key: YOUR_GEMINI_API_KEY_HERE
+        chat:
+          options:
+            model: models/gemini-2.5-flash
+            temperature: 0.2
+        embedding:
+          api-key: YOUR_GEMINI_API_KEY_HERE
+          text:
+            model: gemini-embedding-001
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration: 86400000
+  rag:
+    chunk-size: 500
+    chunk-overlap: 50
+    top-k: 5
