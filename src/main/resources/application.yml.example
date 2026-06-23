@@ -3,9 +3,9 @@ spring:
     name: empty-stack
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/empty-stack
-    username: postgres
-    password: postgres
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/empty-stack}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
 
   jpa:
     hibernate:
@@ -14,6 +14,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
 
   flyway:
     enabled: true
