@@ -8,9 +8,7 @@ Upload a PDF or TXT → ask questions → get answers with source citations.
 
 ## Screenshot
 
-<!-- Add frontend screenshot here -->
-
----
+![Home](src/main/resources/static/screenshot.png)
 
 ## Tech Stack
 
