@@ -39,7 +39,7 @@ spring:
             model: gemini-embedding-001
 app:
   jwt:
-    secret: ${JWT_SECRET}
+    secret: YOUR_JWT_SECRET_BASE64_HERE
     expiration: 86400000
   rag:
     chunk-size: 500
