@@ -11,6 +11,7 @@ import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -47,7 +48,8 @@ public class ChatService {
 
         // Step 3: Find similar chunks from DB
         String vectorStr = toVectorString(queryEmbedding);
-        List<ChunkSearchResult> similarChunks = chunkRepository.findSimilarChunks(vectorStr, k);
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        List<ChunkSearchResult> similarChunks = chunkRepository.findSimilarChunksByUser(vectorStr, k, email);
 
         // Step 4: Build context string from chunks
         String context = similarChunks.stream()

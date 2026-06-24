@@ -26,6 +26,10 @@ public class Document {
     @Column(name = "total_chunks")
     private Integer totalChunks = 0;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User uploadedBy;
+
     @Column(name = "status")
     private String status = "PROCESSING";
 

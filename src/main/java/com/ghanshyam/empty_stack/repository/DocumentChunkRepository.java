@@ -21,4 +21,17 @@ public interface DocumentChunkRepository extends JpaRepository<DocumentChunk, UU
                                               @Param("topK") int topK);
 
     void deleteByDocumentId(UUID documentId);
+
+    @Query(value = """
+            SELECT dc.content, dc.document_name as documentName, dc.chunk_index as chunkIndex
+            FROM document_chunks dc
+            JOIN documents d ON dc.document_id = d.id
+            JOIN users u ON d.user_id = u.id
+            WHERE u.email = :email
+            ORDER BY dc.embedding <=> CAST(:queryEmbedding AS vector)
+            LIMIT :topK
+            """, nativeQuery = true)
+    List<ChunkSearchResult> findSimilarChunksByUser(@Param("queryEmbedding") String queryEmbedding,
+                                                    @Param("topK") int topK,
+                                                    @Param("email") String email);
 }
